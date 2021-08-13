@@ -40,4 +40,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public static function getManagers() {
+        return self::where('role_id', '=' , 2)->get();
+        //return \Illuminate\Support\Facades\DB::table('users')->where('role_id', '=', 2)->get();
+    }
 }
