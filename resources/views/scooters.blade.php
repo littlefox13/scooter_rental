@@ -1,9 +1,7 @@
 @extends('main_layout')
 @section('title', 'Scooters')
 @section('content')
-    <pre>
-        {{$test}}
-    </pre>
+
 <div class="mw6 center pa3 sans-serif">
 
     <h1 class="mb4">Scooters</h1>
@@ -74,7 +72,7 @@
                 @method('DELETE')
 
                 <button type="submit" class="btn btn-danger">
-                    <i class="fa fa-trash"></i> Удалить
+                    <i class="fa fa-trash"></i> Delete
                 </button>
             </form>
 

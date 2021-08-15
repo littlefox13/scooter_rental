@@ -1,22 +1,6 @@
-<!doctype html>
-
-<html>
-
-<head>
-
-    <meta charset="utf-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-
-    <title>Scooters</title>
-
-    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css"/>
-
-</head>
-
-<body>
+@extends('main_layout')
+@section('title', 'Rental Points')
+@section('content')
 
 <div class="mw6 center pa3 sans-serif">
 
@@ -89,10 +73,4 @@
     @endforeach
 </div>
 
-
-
-</div>
-
-</body>
-
-</html>
+@endsection

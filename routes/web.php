@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Rental;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ScooterController;
 use App\Http\Controllers\RentalController;
@@ -22,7 +23,25 @@ Route::resource('scooters', ScooterController::class);
 
 Route::resource('rentals', RentalController::class);
 
-Route::resource('booking', \App\Http\Controllers\BookingController::class);
+Route::resource('booking', \App\Http\Controllers\BookingController::class)->only(['index','store']);
+
+Route::resource('user', \App\Http\Controllers\UserController::class)->only(['index','show','update']);
+
+Route::resource('report', \App\Http\Controllers\ReportController::class);
+
+Route::post('report/show', [\App\Http\Controllers\ReportController::class, 'show']);
+
+Route::get('test', function(){
+    echo '123';
+    echo "<pre>";
+Rental::all();
+    print_r(Rental::groupBy('manager_id')->groupBy('name')->selectRaw('manager_id, name, sum(cost) as sum')->leftJoin('users', 'users.id', '=', 'rentals.manager_id')->get()->toArray()) ;
+    echo "</pre>";
+
+    echo "<pre>";
+
+    echo "</pre>";
+});
 
 Route::get('/', function () {
     echo "<pre>";
@@ -67,13 +86,11 @@ Route::post('/rental_point/update/{rental_point}', function (\App\Models\RentalP
 
 Route::get('/managers', function(){
     echo '<pre>';
-    //$tmps = \Illuminate\Support\Facades\DB::table('users')->where('role_id', '=', 2)->get();
+
     $tmps = \App\Models\User::getManagers();
-    foreach ($tmps as $tmp) {
-        print_r($tmp->id);
-    }
+
     echo '</pre>';
-    return view('managers', ['managers' => $tmps]);
+    return view('managers', ['managers' => \App\Models\User::getManagers()]);
 });
 
 Auth::routes();

@@ -9,6 +9,7 @@ use App\Models\Scooter;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use phpDocumentor\Reflection\Types\Object_;
 
 class RentalController extends Controller
@@ -71,6 +72,7 @@ class RentalController extends Controller
 
         $request->request->set('reservation_time', Carbon::now()->timestamp);
         $request->request->set('rental_status_id', $request->rental_status_id?$request->rental_status_id:1);
+        $request->request->set('manager_id', Auth::id());
 
         Rental::create($request->all());
         return redirect()->route('rentals.index')
@@ -120,6 +122,8 @@ class RentalController extends Controller
             case 'start':
                 $rental->rental_status_id = 1;
                 $rental->reservation_time = Carbon::now()->timestamp;
+                $rental->manager_id = Auth::id();
+
                 $rental->save();
                 return redirect()->route('rentals.index')
                     ->with('success','Rent successfully started.');

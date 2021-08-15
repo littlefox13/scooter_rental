@@ -45,6 +45,7 @@
 
             <input hidden type="text" name="reservation_time" id="rental-collateral_data" class="form-control" value="0">
             <input hidden type="text" name="rental_status_id" id="rental-collateral_data" class="form-control" value="0">
+            <input hidden type="text" name="action" id="rental-action" class="form-control" value="start">
 
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-6">

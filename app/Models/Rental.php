@@ -18,6 +18,8 @@ class Rental extends Model
         'reservation_time',
         'rental_status_id',
         'collateral_data',
-        'cost'
+        'cost',
+        'manager_id'
     ];
+
 }
