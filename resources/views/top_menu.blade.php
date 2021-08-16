@@ -3,7 +3,7 @@
     <ul class="topmenu">
         <li><a href="{{ url('home') }}">Home</a></li>
         <li><a href="{{ url('booking') }}">Booking</a></li>
-        <li><a href="#">Edit<i class="fa fa-angle-down"></i></a>
+        <li>Edit<i class="fa fa-angle-down"></i>
             <ul class="submenu">
                 <li><a href={{ url('scooters') }}>Scooters</a></li>
                 <li><a href="{{ url('rental_points') }}">Rental points</a></li>

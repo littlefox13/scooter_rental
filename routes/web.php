@@ -73,25 +73,12 @@ Route::delete('/rental_point/{rental_point}', function (\App\Models\RentalPoint 
 
 Route::post('/rental_point/update/{rental_point}', function (\App\Models\RentalPoint $rental_point, Request $request) {
 
-    echo '<pre>';
-    print_r($rental_point->address);
-    echo '</pre>';
-    echo '<pre>';
-    print_r($request->address);
-    echo '</pre>';
     $rental_point->address = $request->address;
     $rental_point->save();
     return redirect('/rental_points');
 });
 
-Route::get('/managers', function(){
-    echo '<pre>';
 
-    $tmps = \App\Models\User::getManagers();
-
-    echo '</pre>';
-    return view('managers', ['managers' => \App\Models\User::getManagers()]);
-});
 
 Auth::routes();
 

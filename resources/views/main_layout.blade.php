@@ -3,6 +3,7 @@
     <head>
         <title>@yield('title')</title>
         <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css"/>
+        <link rel="stylesheet" href="/css/app.css"/>
         <meta charset="utf-8">
 
         <meta name="viewport" content="width=device-width, initial-scale=1">

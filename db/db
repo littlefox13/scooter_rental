@@ -1,0 +1,698 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 12.7 (Ubuntu 12.7-0ubuntu0.20.04.1)
+-- Dumped by pg_dump version 12.7 (Ubuntu 12.7-0ubuntu0.20.04.1)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- Name: failed_jobs; Type: TABLE; Schema: public; Owner: admin_rental
+--
+
+CREATE TABLE public.failed_jobs (
+    id bigint NOT NULL,
+    uuid character varying(255) NOT NULL,
+    connection text NOT NULL,
+    queue text NOT NULL,
+    payload text NOT NULL,
+    exception text NOT NULL,
+    failed_at timestamp(0) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+
+ALTER TABLE public.failed_jobs OWNER TO admin_rental;
+
+--
+-- Name: failed_jobs_id_seq; Type: SEQUENCE; Schema: public; Owner: admin_rental
+--
+
+CREATE SEQUENCE public.failed_jobs_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.failed_jobs_id_seq OWNER TO admin_rental;
+
+--
+-- Name: failed_jobs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin_rental
+--
+
+ALTER SEQUENCE public.failed_jobs_id_seq OWNED BY public.failed_jobs.id;
+
+
+--
+-- Name: migrations; Type: TABLE; Schema: public; Owner: admin_rental
+--
+
+CREATE TABLE public.migrations (
+    id integer NOT NULL,
+    migration character varying(255) NOT NULL,
+    batch integer NOT NULL
+);
+
+
+ALTER TABLE public.migrations OWNER TO admin_rental;
+
+--
+-- Name: migrations_id_seq; Type: SEQUENCE; Schema: public; Owner: admin_rental
+--
+
+CREATE SEQUENCE public.migrations_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.migrations_id_seq OWNER TO admin_rental;
+
+--
+-- Name: migrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin_rental
+--
+
+ALTER SEQUENCE public.migrations_id_seq OWNED BY public.migrations.id;
+
+
+--
+-- Name: password_resets; Type: TABLE; Schema: public; Owner: admin_rental
+--
+
+CREATE TABLE public.password_resets (
+    email character varying(255) NOT NULL,
+    token character varying(255) NOT NULL,
+    created_at timestamp(0) without time zone
+);
+
+
+ALTER TABLE public.password_resets OWNER TO admin_rental;
+
+--
+-- Name: rental_points; Type: TABLE; Schema: public; Owner: admin_rental
+--
+
+CREATE TABLE public.rental_points (
+    id integer NOT NULL,
+    address character(200)
+);
+
+
+ALTER TABLE public.rental_points OWNER TO admin_rental;
+
+--
+-- Name: rental_point_id_seq; Type: SEQUENCE; Schema: public; Owner: admin_rental
+--
+
+CREATE SEQUENCE public.rental_point_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.rental_point_id_seq OWNER TO admin_rental;
+
+--
+-- Name: rental_point_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin_rental
+--
+
+ALTER SEQUENCE public.rental_point_id_seq OWNED BY public.rental_points.id;
+
+
+--
+-- Name: rental_statuses; Type: TABLE; Schema: public; Owner: admin_rental
+--
+
+CREATE TABLE public.rental_statuses (
+    id integer NOT NULL,
+    description character(30)
+);
+
+
+ALTER TABLE public.rental_statuses OWNER TO admin_rental;
+
+--
+-- Name: rental_statuses_id_seq; Type: SEQUENCE; Schema: public; Owner: admin_rental
+--
+
+CREATE SEQUENCE public.rental_statuses_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.rental_statuses_id_seq OWNER TO admin_rental;
+
+--
+-- Name: rental_statuses_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin_rental
+--
+
+ALTER SEQUENCE public.rental_statuses_id_seq OWNED BY public.rental_statuses.id;
+
+
+--
+-- Name: rentals; Type: TABLE; Schema: public; Owner: admin_rental
+--
+
+CREATE TABLE public.rentals (
+    id integer NOT NULL,
+    scooter_id integer,
+    user_id integer,
+    rental_point_id integer,
+    reservation_time character(20),
+    rental_status_id integer,
+    collateral_data character(200),
+    cost integer,
+    manager_id integer
+);
+
+
+ALTER TABLE public.rentals OWNER TO admin_rental;
+
+--
+-- Name: rentals_id_seq; Type: SEQUENCE; Schema: public; Owner: admin_rental
+--
+
+CREATE SEQUENCE public.rentals_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.rentals_id_seq OWNER TO admin_rental;
+
+--
+-- Name: rentals_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin_rental
+--
+
+ALTER SEQUENCE public.rentals_id_seq OWNED BY public.rentals.id;
+
+
+--
+-- Name: roles; Type: TABLE; Schema: public; Owner: admin_rental
+--
+
+CREATE TABLE public.roles (
+    id integer NOT NULL,
+    description character(200)
+);
+
+
+ALTER TABLE public.roles OWNER TO admin_rental;
+
+--
+-- Name: roles_id_seq; Type: SEQUENCE; Schema: public; Owner: admin_rental
+--
+
+CREATE SEQUENCE public.roles_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.roles_id_seq OWNER TO admin_rental;
+
+--
+-- Name: roles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin_rental
+--
+
+ALTER SEQUENCE public.roles_id_seq OWNED BY public.roles.id;
+
+
+--
+-- Name: scooters; Type: TABLE; Schema: public; Owner: admin_rental
+--
+
+CREATE TABLE public.scooters (
+    id integer NOT NULL,
+    description character(200)
+);
+
+
+ALTER TABLE public.scooters OWNER TO admin_rental;
+
+--
+-- Name: scooters_id_seq; Type: SEQUENCE; Schema: public; Owner: admin_rental
+--
+
+CREATE SEQUENCE public.scooters_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.scooters_id_seq OWNER TO admin_rental;
+
+--
+-- Name: scooters_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin_rental
+--
+
+ALTER SEQUENCE public.scooters_id_seq OWNED BY public.scooters.id;
+
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: admin_rental
+--
+
+CREATE TABLE public.users (
+    id bigint NOT NULL,
+    name character varying(255) NOT NULL,
+    email character varying(255) NOT NULL,
+    email_verified_at timestamp(0) without time zone,
+    password character varying(255) NOT NULL,
+    remember_token character varying(100),
+    created_at timestamp(0) without time zone,
+    updated_at timestamp(0) without time zone,
+    role_id integer
+);
+
+
+ALTER TABLE public.users OWNER TO admin_rental;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: admin_rental
+--
+
+CREATE SEQUENCE public.users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.users_id_seq OWNER TO admin_rental;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin_rental
+--
+
+ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
+
+
+--
+-- Name: failed_jobs id; Type: DEFAULT; Schema: public; Owner: admin_rental
+--
+
+ALTER TABLE ONLY public.failed_jobs ALTER COLUMN id SET DEFAULT nextval('public.failed_jobs_id_seq'::regclass);
+
+
+--
+-- Name: migrations id; Type: DEFAULT; Schema: public; Owner: admin_rental
+--
+
+ALTER TABLE ONLY public.migrations ALTER COLUMN id SET DEFAULT nextval('public.migrations_id_seq'::regclass);
+
+
+--
+-- Name: rental_points id; Type: DEFAULT; Schema: public; Owner: admin_rental
+--
+
+ALTER TABLE ONLY public.rental_points ALTER COLUMN id SET DEFAULT nextval('public.rental_point_id_seq'::regclass);
+
+
+--
+-- Name: rental_statuses id; Type: DEFAULT; Schema: public; Owner: admin_rental
+--
+
+ALTER TABLE ONLY public.rental_statuses ALTER COLUMN id SET DEFAULT nextval('public.rental_statuses_id_seq'::regclass);
+
+
+--
+-- Name: rentals id; Type: DEFAULT; Schema: public; Owner: admin_rental
+--
+
+ALTER TABLE ONLY public.rentals ALTER COLUMN id SET DEFAULT nextval('public.rentals_id_seq'::regclass);
+
+
+--
+-- Name: roles id; Type: DEFAULT; Schema: public; Owner: admin_rental
+--
+
+ALTER TABLE ONLY public.roles ALTER COLUMN id SET DEFAULT nextval('public.roles_id_seq'::regclass);
+
+
+--
+-- Name: scooters id; Type: DEFAULT; Schema: public; Owner: admin_rental
+--
+
+ALTER TABLE ONLY public.scooters ALTER COLUMN id SET DEFAULT nextval('public.scooters_id_seq'::regclass);
+
+
+--
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: admin_rental
+--
+
+ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
+
+
+--
+-- Data for Name: failed_jobs; Type: TABLE DATA; Schema: public; Owner: admin_rental
+--
+
+COPY public.failed_jobs (id, uuid, connection, queue, payload, exception, failed_at) FROM stdin;
+\.
+
+
+--
+-- Data for Name: migrations; Type: TABLE DATA; Schema: public; Owner: admin_rental
+--
+
+COPY public.migrations (id, migration, batch) FROM stdin;
+1	2014_10_12_000000_create_users_table	1
+2	2014_10_12_100000_create_password_resets_table	1
+3	2019_08_19_000000_create_failed_jobs_table	1
+\.
+
+
+--
+-- Data for Name: password_resets; Type: TABLE DATA; Schema: public; Owner: admin_rental
+--
+
+COPY public.password_resets (email, token, created_at) FROM stdin;
+\.
+
+
+--
+-- Data for Name: rental_points; Type: TABLE DATA; Schema: public; Owner: admin_rental
+--
+
+COPY public.rental_points (id, address) FROM stdin;
+2	Набережная                                                                                                                                                                                              
+1	Баумана 2 а                                                                                                                                                                                             
+5	кываппыикиапкывпывы                                                                                                                                                                                     
+3	33333333                                                                                                                                                                                                
+\.
+
+
+--
+-- Data for Name: rental_statuses; Type: TABLE DATA; Schema: public; Owner: admin_rental
+--
+
+COPY public.rental_statuses (id, description) FROM stdin;
+1	rental start                  
+2	rental end                    
+3	rental booked                 
+\.
+
+
+--
+-- Data for Name: rentals; Type: TABLE DATA; Schema: public; Owner: admin_rental
+--
+
+COPY public.rentals (id, scooter_id, user_id, rental_point_id, reservation_time, rental_status_id, collateral_data, cost, manager_id) FROM stdin;
+2	2	2	2	1628782028          	2	\N	\N	\N
+4	8	11	3	1628796510          	1	ddddddddddd                                                                                                                                                                                             	\N	\N
+5	8	11	3	1628796687          	2	\N	\N	\N
+7	2	11	3	1628852984          	3	\N	\N	\N
+8	2	11	3	1628853019          	3	\N	\N	\N
+9	2	11	3	1628755980          	3	\N	\N	\N
+10	2	11	3	1628756880          	3	\N	\N	\N
+11	2	6	2	1629047502          	1	test with manager_id                                                                                                                                                                                    	\N	\N
+14	1	4	2	1629047693          	1	test with manager_id4                                                                                                                                                                                   	\N	11
+13	1	4	2	1629047611          	1	tessssssssssttttttt                                                                                                                                                                                     	\N	11
+12	4	5	2	1629047565          	1	test with manager_id2                                                                                                                                                                                   	300	3
+1	1	1	1	1628795588          	2	\N	150	3
+15	2	3	3	1629047853          	1	test with manager_id10                                                                                                                                                                                  	200	11
+6	8	11	3	1628796510          	3	\N	500	2
+3	4	11	5	1628792972          	1	123edfssa                                                                                                                                                                                               	700	2
+\.
+
+
+--
+-- Data for Name: roles; Type: TABLE DATA; Schema: public; Owner: admin_rental
+--
+
+COPY public.roles (id, description) FROM stdin;
+1	admin                                                                                                                                                                                                   
+2	manager                                                                                                                                                                                                 
+3	customer                                                                                                                                                                                                
+\.
+
+
+--
+-- Data for Name: scooters; Type: TABLE DATA; Schema: public; Owner: admin_rental
+--
+
+COPY public.scooters (id, description) FROM stdin;
+1	City-Ride                                                                                                                                                                                               
+2	XIAOMI Mi Electric                                                                                                                                                                                      
+4	test 2222                                                                                                                                                                                               
+8	2222                                                                                                                                                                                                    
+\.
+
+
+--
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: admin_rental
+--
+
+COPY public.users (id, name, email, email_verified_at, password, remember_token, created_at, updated_at, role_id) FROM stdin;
+4	Norbert Turcotte DDS	daugherty.angie@example.org	2021-08-03 15:34:48	$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi	QNFpE9wR7U	2021-08-03 15:34:48	2021-08-03 15:34:48	2
+7	Mrs. Alycia Bartoletti	ohara.krystal@example.net	2021-08-03 15:34:48	$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi	Bbj3rsczLp	2021-08-03 15:34:48	2021-08-03 15:34:48	2
+3	Andreanne Mills	strantow@example.net	2021-08-03 15:34:48	$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi	SNeWeYUA2H	2021-08-03 15:34:48	2021-08-03 15:34:48	2
+9	Trey Luettgen	nemard@example.com	2021-08-03 15:34:48	$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi	VHZTZLPxwl	2021-08-03 15:34:48	2021-08-03 15:34:48	3
+8	Jayda Swift	waters.krystina@example.net	2021-08-03 15:34:48	$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi	ssQnghzSkh	2021-08-03 15:34:48	2021-08-03 15:34:48	3
+1	Prof. Marcellus Ebert MD	randy47@example.net	2021-08-03 15:34:48	$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi	jWeLP8MG37	2021-08-03 15:34:48	2021-08-03 15:34:48	1
+10	Julien Kertzmann	elittel@example.net	2021-08-03 15:34:48	$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi	JvqrDAFZLB	2021-08-03 15:34:48	2021-08-03 15:34:48	3
+5	Austin Harber	tbartell@example.com	2021-08-03 15:34:48	$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi	zjnnBwsBdh	2021-08-03 15:34:48	2021-08-03 15:34:48	3
+2	Mrs. Vickie Lemke IV	qbechtelar@example.org	2021-08-03 15:34:48	$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi	4PDrRTWYpH	2021-08-03 15:34:48	2021-08-03 15:34:48	1
+6	Ms. Delphine Gutmann DDS	lupe.raynor@example.net	2021-08-03 15:34:48	$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi	f0HE20Ygbu	2021-08-03 15:34:48	2021-08-03 15:34:48	3
+11	fox	meved13@gmail.com	\N	$2y$10$jY3Kzl9O5AIJ3MDaNgMNbOtLUXi532lmsdzIgqMzaPcuTp.0.i4Zq	\N	2021-08-12 14:30:05	2021-08-15 21:16:58	1
+\.
+
+
+--
+-- Name: failed_jobs_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin_rental
+--
+
+SELECT pg_catalog.setval('public.failed_jobs_id_seq', 1, false);
+
+
+--
+-- Name: migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin_rental
+--
+
+SELECT pg_catalog.setval('public.migrations_id_seq', 3, true);
+
+
+--
+-- Name: rental_point_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin_rental
+--
+
+SELECT pg_catalog.setval('public.rental_point_id_seq', 5, true);
+
+
+--
+-- Name: rental_statuses_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin_rental
+--
+
+SELECT pg_catalog.setval('public.rental_statuses_id_seq', 3, true);
+
+
+--
+-- Name: rentals_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin_rental
+--
+
+SELECT pg_catalog.setval('public.rentals_id_seq', 15, true);
+
+
+--
+-- Name: roles_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin_rental
+--
+
+SELECT pg_catalog.setval('public.roles_id_seq', 1, false);
+
+
+--
+-- Name: scooters_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin_rental
+--
+
+SELECT pg_catalog.setval('public.scooters_id_seq', 8, true);
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin_rental
+--
+
+SELECT pg_catalog.setval('public.users_id_seq', 11, true);
+
+
+--
+-- Name: failed_jobs failed_jobs_pkey; Type: CONSTRAINT; Schema: public; Owner: admin_rental
+--
+
+ALTER TABLE ONLY public.failed_jobs
+    ADD CONSTRAINT failed_jobs_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: failed_jobs failed_jobs_uuid_unique; Type: CONSTRAINT; Schema: public; Owner: admin_rental
+--
+
+ALTER TABLE ONLY public.failed_jobs
+    ADD CONSTRAINT failed_jobs_uuid_unique UNIQUE (uuid);
+
+
+--
+-- Name: migrations migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: admin_rental
+--
+
+ALTER TABLE ONLY public.migrations
+    ADD CONSTRAINT migrations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: rental_points rental_point_pk; Type: CONSTRAINT; Schema: public; Owner: admin_rental
+--
+
+ALTER TABLE ONLY public.rental_points
+    ADD CONSTRAINT rental_point_pk PRIMARY KEY (id);
+
+
+--
+-- Name: rental_statuses rental_statuses_pk; Type: CONSTRAINT; Schema: public; Owner: admin_rental
+--
+
+ALTER TABLE ONLY public.rental_statuses
+    ADD CONSTRAINT rental_statuses_pk PRIMARY KEY (id);
+
+
+--
+-- Name: rentals rentals_pk; Type: CONSTRAINT; Schema: public; Owner: admin_rental
+--
+
+ALTER TABLE ONLY public.rentals
+    ADD CONSTRAINT rentals_pk PRIMARY KEY (id);
+
+
+--
+-- Name: roles roles_pk; Type: CONSTRAINT; Schema: public; Owner: admin_rental
+--
+
+ALTER TABLE ONLY public.roles
+    ADD CONSTRAINT roles_pk PRIMARY KEY (id);
+
+
+--
+-- Name: scooters scooters_pk; Type: CONSTRAINT; Schema: public; Owner: admin_rental
+--
+
+ALTER TABLE ONLY public.scooters
+    ADD CONSTRAINT scooters_pk PRIMARY KEY (id);
+
+
+--
+-- Name: users users_email_unique; Type: CONSTRAINT; Schema: public; Owner: admin_rental
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_email_unique UNIQUE (email);
+
+
+--
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: admin_rental
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: password_resets_email_index; Type: INDEX; Schema: public; Owner: admin_rental
+--
+
+CREATE INDEX password_resets_email_index ON public.password_resets USING btree (email);
+
+
+--
+-- Name: scooters_id_uindex; Type: INDEX; Schema: public; Owner: admin_rental
+--
+
+CREATE UNIQUE INDEX scooters_id_uindex ON public.scooters USING btree (id);
+
+
+--
+-- Name: rentals rentals_rental_point_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: admin_rental
+--
+
+ALTER TABLE ONLY public.rentals
+    ADD CONSTRAINT rentals_rental_point_id_fk FOREIGN KEY (rental_point_id) REFERENCES public.rental_points(id);
+
+
+--
+-- Name: rentals rentals_rental_statuses_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: admin_rental
+--
+
+ALTER TABLE ONLY public.rentals
+    ADD CONSTRAINT rentals_rental_statuses_id_fk FOREIGN KEY (rental_status_id) REFERENCES public.rental_statuses(id);
+
+
+--
+-- Name: rentals rentals_scooters_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: admin_rental
+--
+
+ALTER TABLE ONLY public.rentals
+    ADD CONSTRAINT rentals_scooters_id_fk FOREIGN KEY (scooter_id) REFERENCES public.scooters(id);
+
+
+--
+-- Name: rentals rentals_users_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: admin_rental
+--
+
+ALTER TABLE ONLY public.rentals
+    ADD CONSTRAINT rentals_users_id_fk FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
+-- Name: rentals rentals_users_id_fk_2; Type: FK CONSTRAINT; Schema: public; Owner: admin_rental
+--
+
+ALTER TABLE ONLY public.rentals
+    ADD CONSTRAINT rentals_users_id_fk_2 FOREIGN KEY (manager_id) REFERENCES public.users(id);
+
+
+--
+-- Name: users users_roles_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: admin_rental
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_roles_id_fk FOREIGN KEY (role_id) REFERENCES public.roles(id);
+
+
+--
+-- PostgreSQL database dump complete
+--
+

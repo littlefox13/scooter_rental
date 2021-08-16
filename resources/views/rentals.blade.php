@@ -116,68 +116,7 @@
 
         </table>
 
-        @foreach($rentals as $rental)
-            <div class="pa2 mb3 striped--near-white">
 
-                <header class="b mb2">{{ $rental->id }}</header>
-
-                <p class="pl2">
-
-                <p class="mb2">scooter: {{ $scooters[$rental->scooter_id]['description'] }}</p>
-
-                 <p class="mb2">user: {{ $users[$rental->user_id]['name'] }}</p>
-
-                <p class="mb2">rental_point: {{ $rental_points[$rental->rental_point_id]['address'] }}</p>
-
-
-
-                @if($rental->rental_status_id == 1)
-                    Rental started: {{ Carbon\Carbon::createFromTimestamp($rental->reservation_time)->toDateTimeString() }}
-                    <form action="{{ route('rentals.update',$rental->id) }}" method="POST">
-                        @csrf
-                        @method('put')
-                        <label class="col-sm-3 control-label">Cost</label>
-                        <input type="text" name="cost" class="form-control" value="">
-                        <input hidden type="text" name="action" id="booking_rental" class="form-control" value="end">
-                        <button type="submit" class="btn btn-danger">
-                            <i class="fa fa-trash"></i> end
-                        </button>
-                    </form>
-                @endif
-
-                @if($rental->rental_status_id == 2)
-                    @if ($rental->cost)
-                        <p class="mb2">Rental ended: {{ Carbon\Carbon::createFromTimestamp($rental->reservation_time)->toDateTimeString() }}</p>
-                        <p class="mb2">Cost: {{ $rental->cost }}</p>
-                    @else
-                        <p class="mb2">Rental reservation: {{ Carbon\Carbon::createFromTimestamp($rental->reservation_time)->toDateTimeString() }}</p>
-                        <p class="mb2">reservation abort</p>
-                    @endif
-                @endif
-
-                @if($rental->rental_status_id == 3)
-
-                    <p class="mb2">reserved to: {{ Carbon\Carbon::createFromTimestamp($rental->reservation_time)->toDateTimeString() }}</p>
-                    <form action="{{ route('rentals.update',$rental->id) }}" method="POST">
-                        @csrf
-                        @method('put')
-                        <input hidden type="text" name="action" id="booking_rental" class="form-control" value="start">
-                        <button type="submit" class="btn btn-danger">
-                            <i class="fa fa-trash"></i> начать
-                        </button>
-                    </form>
-                    <form action="{{ route('rentals.update',$rental->id) }}" method="POST">
-                        @csrf
-                        @method('put')
-                        <input hidden type="text" name="action" id="booking_rental" class="form-control" value="end">
-                        <button type="submit" class="btn btn-danger">
-                            <i class="fa fa-trash"></i> abort reservation
-                        </button>
-                    </form>
-                @endif
-
-            </div>
-        @endforeach
     </div>
 
 
