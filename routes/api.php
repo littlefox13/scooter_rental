@@ -34,8 +34,7 @@ Route::middleware('api')->group(function (){
     Route::resource('users', \App\Http\Controllers\UserController::class);
 });
 
-Route::post('/rentals/update', [\App\Http\Controllers\RentalController::class, 'update']);
-
 Route::middleware('api')->group(function (){
+    Route::post('/rentals/update', [\App\Http\Controllers\RentalController::class, 'update']);
     Route::resource('rentals', \App\Http\Controllers\RentalController::class);
 });
