@@ -4,6 +4,7 @@
         <title>@yield('title')</title>
         <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css"/>
         <link rel="stylesheet" href="/css/app.css"/>
+        <script src="{{ asset('/js/app.js') }}" defer></script>
         <meta charset="utf-8">
 
         <meta name="viewport" content="width=device-width, initial-scale=1">

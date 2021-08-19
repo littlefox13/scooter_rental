@@ -41,4 +41,8 @@
             </div>
         </form>
     </div>
+    <h1>Vue !</h1>
+    <div id="app">
+        <example-component></example-component>
+    </div>
 @endsection
