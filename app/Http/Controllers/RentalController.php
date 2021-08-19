@@ -26,11 +26,14 @@ class RentalController extends Controller
         $rental_points = RentalPoint::all()->keyBy('id');
         $users = User::all()->keyBy('id');
         $rental_statuses = RentalStatuse::all()->keyBy('id');
-        return view('rentals', ['rentals' => $rentals,
+        foreach ($rentals as $k => $v) {
+            $rentals[$k]['reservation_time'] = trim($v['reservation_time']);
+        }
+        return ['rentals' => $rentals,
                                         'scooters'=>$scooters,
                                         'users'=>$users,
                                         'rental_points' =>$rental_points,
-                                        'rental_statuses'=>$rental_statuses]);
+                                        'rental_statuses'=>$rental_statuses];
     }
 
 
@@ -108,9 +111,9 @@ class RentalController extends Controller
      * @param  \App\Models\Rental  $rental
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Rental $rental)
+    public function update(Request $request)
     {
-
+        return $request->all();
         switch ($request->action) {
             case 'end':
                 $rental->rental_status_id = 2;

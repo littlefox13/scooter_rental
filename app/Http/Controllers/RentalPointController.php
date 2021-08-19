@@ -14,7 +14,8 @@ class RentalPointController extends Controller
      */
     public function index()
     {
-        //
+        $rental_point = RentalPoint::all()->toArray();
+        return $rental_point;
     }
 
     /**
@@ -35,7 +36,13 @@ class RentalPointController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'address' => 'required'
+        ]);
+
+        $rental_point = RentalPoint::create($request->all());
+
+        return response()->json($rental_point);
     }
 
     /**
@@ -44,9 +51,10 @@ class RentalPointController extends Controller
      * @param  \App\Models\RentalPoint  $rentalPoint
      * @return \Illuminate\Http\Response
      */
-    public function show(RentalPoint $rentalPoint)
+    public function show($id)
     {
-        //
+        $rental_point = RentalPoint::find($id);
+        return response()->json($rental_point);
     }
 
     /**
@@ -67,9 +75,13 @@ class RentalPointController extends Controller
      * @param  \App\Models\RentalPoint  $rentalPoint
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, RentalPoint $rentalPoint)
+    public function update($id, Request $request)
     {
-        //
+        $rental_point = RentalPoint::find($id);
+
+        $rental_point->update($request->all());
+
+        return response()->json('RentalPoint updated successfully');
     }
 
     /**
@@ -78,8 +90,11 @@ class RentalPointController extends Controller
      * @param  \App\Models\RentalPoint  $rentalPoint
      * @return \Illuminate\Http\Response
      */
-    public function destroy(RentalPoint $rentalPoint)
+    public function destroy($id)
     {
-        //
+        $rentalPoint = RentalPoint::find($id);
+        $rentalPoint->delete();
+
+        return response()->json($id);
     }
 }

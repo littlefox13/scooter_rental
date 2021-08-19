@@ -11,21 +11,29 @@ class UserController extends Controller
 {
     public function index()
     {
-
-        return view('users', ['users' => \App\Models\User::all(), 'roles'=>Role::all()->keyBy('id')]);
+        return ['users' => \App\Models\User::all()->toArray(), 'roles'=>Role::all()->keyBy('id')];
     }
 
-    public function show(User $user)
+    public function show($id)
     {
-        return view('user_edit', ['user'=>$user, 'roles'=>Role::all()->keyBy('id')]);
+        $user = User::find($id);
+        return ['user'=>$user, 'roles'=>Role::all()->keyBy('id')];
     }
 
-    public function update(Request $request, User $user)
+    public function update($id, Request $request)
     {
+        $user = User::find($id);
 
         $user->update($request->all());
 
-        return redirect()->route('user.index')
-            ->with('success','User updated successfully');
+        return response()->json('User updated successfully');
+    }
+
+    public function destroy($id)
+    {
+        $user = User::find($id);
+        $user->delete();
+
+        return response()->json('User deleted successfully');
     }
 }

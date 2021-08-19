@@ -18,12 +18,9 @@ class ScooterController extends Controller
      */
     public function index()
     {
-        $scooters = Scooter::all();
-        $mytime = Carbon::now()->subMinutes(15)->timestamp;
-        $time = Carbon::now()->subMinutes(13)->timestamp;
-        $tmp = DB::table('rentals')->where('rental_status_id', '=','3')
-            ->where('reservation_time', '<', $mytime)->get();
-        return view('scooters', ['scooters' => $scooters, 'test'=>$tmp]);
+        $scooters = Scooter::all()->toArray();
+        return $scooters;
+        //return view('scooters', ['scooters' => $scooters, 'test'=>$tmp]);
     }
 
     /**
@@ -44,14 +41,17 @@ class ScooterController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'description' => 'required'
         ]);
 
         Scooter::create($request->all());
 
+        return response()->json('Scooter created successfully');
+        /*
         return redirect()->route('scooters.index')
-            ->with('success','Scooter created successfully.');
+            ->with('success','Scooter created successfully.');*/
     }
 
     /**
@@ -60,9 +60,10 @@ class ScooterController extends Controller
      * @param  \App\Models\Scooter  $scooter
      * @return \Illuminate\Http\Response
      */
-    public function show(Scooter $scooter)
+    public function show($id)
     {
-        //
+        $scooter = Scooter::find($id);
+        return response()->json($scooter);
     }
 
     /**
@@ -83,16 +84,16 @@ class ScooterController extends Controller
      * @param  \App\Models\Scooter  $scooter
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Scooter $scooter)
+    public function update($id, Request $request)
     {
-        $request->validate([
-            'description' => 'required',
-        ]);
+        $scooter = Scooter::find($id);
 
         $scooter->update($request->all());
 
-        return redirect()->route('scooters.index')
-                         ->with('success','Scooter with id: '.$scooter->id.' updated successfully');
+        return response()->json('Scooter updated successfully');
+
+        /*return redirect()->route('scooters.index')
+                         ->with('success','Scooter with id: '.$scooter->id.' updated successfully');*/
     }
 
     /**
@@ -101,11 +102,13 @@ class ScooterController extends Controller
      * @param  \App\Models\Scooter  $scooter
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Scooter $scooter)
+    public function destroy($id)
     {
+        $scooter = Scooter::find($id);
         $scooter->delete();
 
-        return redirect()->route('scooters.index')
-            ->with('success','Scooter '.$scooter->description.' delete successfully');
+        return response()->json('Scooter deleted successfully');
+        /*return redirect()->route('scooters.index')
+            ->with('success','Scooter '.$scooter->description.' delete successfully');*/
     }
 }

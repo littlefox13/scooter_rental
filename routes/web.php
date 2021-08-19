@@ -19,9 +19,11 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::resource('scooters', ScooterController::class);
+//Route::resource('scooters', ScooterController::class);
 
-Route::resource('rentals', RentalController::class);
+Route::get('{any}', function () {
+    return view('app');
+})->where('any', '.*');
 
 Route::resource('booking', \App\Http\Controllers\BookingController::class)->only(['index','store']);
 

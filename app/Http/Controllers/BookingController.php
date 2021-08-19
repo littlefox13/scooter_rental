@@ -21,16 +21,13 @@ class BookingController extends RentalController
      */
     public function index()
     {
-        $scooters = Scooter::all()->keyBy('id');
-        $rental_points = RentalPoint::all()->keyBy('id');
-        return view('booking', [
-            'scooters' => $scooters,
-            'rental_points' => $rental_points]);
+        $scooters = Scooter::all()->toArray();
+        $rental_points = RentalPoint::all()->toArray();
+        return ['scooters'=>$scooters, 'rental_points'=>$rental_points];
     }
 
     public function store(Request $request)
     {
-
         $request->validate([
             'scooter_id' => 'required',
             'rental_point_id' => 'required',
@@ -44,7 +41,9 @@ class BookingController extends RentalController
         //return $request->all();
         Rental::create($request->all());
 
-        return redirect()->route('rentals.index')
-            ->with('success','Rent successfully started.');
+        return response()->json('Booking created successfully');
+
+        /*return redirect()->route('rentals.index')
+            ->with('success','Rent successfully started.');*/
     }
 }

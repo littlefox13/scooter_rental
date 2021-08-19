@@ -8,6 +8,22 @@ require('./bootstrap');
 
 window.Vue = require('vue').default;
 
+import App from './App.vue';
+import VueAxios from 'vue-axios';
+import VueRouter from 'vue-router';
+import axios from 'axios';
+import { routes } from './routes';
+
+import moment from 'moment';
+
+Vue.filter('formatDate', function(value) {
+    console.log(value);
+    if (value) {
+        return moment(String(value * 1000)).format('MM/DD/YYYY')
+    }
+});
+
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -27,10 +43,26 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+Vue.use(VueRouter);
+Vue.use(VueAxios, axios);
+
+
+const router = new VueRouter({
+    mode: 'history',
+    routes: routes
+});
 
 const app = new Vue({
     el: '#app',
+    router: router,
+    render: h => h(App),
 });
+/*
+const app = new Vue({
+    el: '#app',
+});
+*/
+
 
 /*
 window.onload = function () {
