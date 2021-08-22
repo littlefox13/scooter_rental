@@ -21,6 +21,8 @@ use Illuminate\Http\Request;
 
 //Route::resource('scooters', ScooterController::class);
 
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 Route::get('{any}', function () {
     return view('app');
 })->where('any', '.*');
@@ -36,8 +38,8 @@ Route::post('report/show', [\App\Http\Controllers\ReportController::class, 'show
 Route::get('test', function(){
     echo '123';
     echo "<pre>";
-Rental::all();
-    print_r(Rental::groupBy('manager_id')->groupBy('name')->selectRaw('manager_id, name, sum(cost) as sum')->leftJoin('users', 'users.id', '=', 'rentals.manager_id')->get()->toArray()) ;
+    $tmp = DB::table('users')->get();
+    print_r($tmp);
     echo "</pre>";
 
     echo "<pre>";

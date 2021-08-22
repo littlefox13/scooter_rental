@@ -113,14 +113,15 @@ class RentalController extends Controller
      */
     public function update(Request $request)
     {
-        return $request->all();
+        //return $request->all();
+        $rental = Rental::find($request->id);
         switch ($request->action) {
             case 'end':
                 $rental->rental_status_id = 2;
                 $rental->reservation_time = Carbon::now()->timestamp;
+                $rental->cost = $request->cost;
                 $rental->save();
-                return redirect()->route('rentals.index')
-                    ->with('success','Rent successfully ended.');
+
                 break;
             case 'start':
                 $rental->rental_status_id = 1;
@@ -128,15 +129,13 @@ class RentalController extends Controller
                 $rental->manager_id = Auth::id();
 
                 $rental->save();
-                return redirect()->route('rentals.index')
-                    ->with('success','Rent successfully started.');
+
                 break;
             case 'update':
 
                 break;
         }
-        return redirect()->route('rentals.index')
-            ->with('success','Rent successfully updated.');
+        return $rental;
     }
 
     /**

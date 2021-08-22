@@ -7,6 +7,7 @@ import EditRentalPoint from "./components/EditRentalPoint";
 import AllUsers from "./components/AllUsers";
 import EditUser from "./components/EditUser";
 import AllRentals from "./components/AllRentals";
+import Reports from "./components/Reports";
 
 export const routes = [
     {
@@ -53,6 +54,11 @@ export const routes = [
         name: 'rentals',
         path: '/rentals',
         component: AllRentals
+    },
+    {
+        name: 'reports',
+        path: '/reports',
+        component: Reports
     }
 
 

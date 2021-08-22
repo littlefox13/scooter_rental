@@ -38,3 +38,7 @@ Route::middleware('api')->group(function (){
     Route::post('/rentals/update', [\App\Http\Controllers\RentalController::class, 'update']);
     Route::resource('rentals', \App\Http\Controllers\RentalController::class);
 });
+
+Route::middleware('api')->group(function(){
+    Route::resource('/reports', \App\Http\Controllers\ReportController::class);
+});

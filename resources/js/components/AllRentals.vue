@@ -50,32 +50,14 @@
                     <div v-if="rental.rental_status_id == 1">
 
                         <input type="text" v-model="rentals[index].cost" class="form-control" value="">
-                        <input type="text" hidden v-model="rentals[index].action" class="form-control" value="end">
 
-                        <button class="btn btn-danger" @click="updateRental(rentals[index].id, index, rentals[index].cost, 'end')">end</button>
+                        <button class="btn btn-danger" @click="updateRental(index, 'end')">end</button>
                     </div>
 
-                    <!--
-                    @if($rental->rental_status_id == 3)
-
-                    <form action="{{ route('rentals.update',$rental->id) }}" method="POST">
-                        @csrf
-                        @method('put')
-                        <input hidden type="text" name="action" id="booking_rental" class="form-control" value="start">
-                        <button type="submit" class="btn btn-danger">
-                            <i class="fa fa-trash"></i> start
-                        </button>
-                    </form>
-                    <form action="{{ route('rentals.update',$rental->id) }}" method="POST">
-                        @csrf
-                        @method('put')
-                        <input hidden type="text" name="action" id="booking_rental" class="form-control" value="end">
-                        <button type="submit" class="btn btn-danger">
-                            <i class="fa fa-trash"></i> abort reservation
-                        </button>
-                    </form>
-                    @endif
-                    -->
+                    <div v-if="rental.rental_status_id == 3">
+                        <button class="btn btn-danger" @click="updateRental(index, 'start')">start</button>
+                        <button class="btn btn-danger" @click="updateRental(index, 'end')">abort reservation</button>
+                    </div>
                 </td>
             </tr>
             </tbody>
@@ -121,13 +103,13 @@
 
                 return moment.unix(date2).format('DD/MM/YYYY, hh:mm:ss');
             },
-            updateRental(id, index, cost, action) {
-                console.log(id, index, cost);
+            updateRental(index, action) {
                 this.rentals[index].action = action;
                 this.axios
                     .post(`/api/rentals/update/`, this.rentals[index])
                     .then((res) => {
                         console.log(res);
+                        this.rentals[index] = res.data;
                     });
             }
         }

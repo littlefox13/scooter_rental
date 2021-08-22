@@ -14,13 +14,13 @@ class ReportController extends Controller {
         return view('report');
     }
 
-    public function show(Request $request)
+    public function show($type)
     {
 
-        switch ($request->type){
+        switch ($type){
             case 'manager':
                 $data = Rental::groupBy('manager_id')->groupBy('name')->selectRaw('manager_id as id, name, sum(cost) as sum')->leftJoin('users', 'users.id', '=', 'rentals.manager_id')->get()->toArray();
-                return view('report', ['data' => $data]);
+                return $data;
                 break;
 
             case 'rental_point':
@@ -28,7 +28,7 @@ class ReportController extends Controller {
                                     ->selectRaw('rental_point_id as id, address as name, sum(cost) as sum')
                                     ->leftJoin('rental_points', 'rental_points.id', '=', 'rentals.rental_point_id')
                                     ->get()->toArray();
-                return view('report', ['data' => $data]);
+                return $data;
                 break;
 
             case 'scooter':
@@ -36,7 +36,7 @@ class ReportController extends Controller {
                     ->selectRaw('scooter_id as id, description as name, sum(cost) as sum')
                     ->leftJoin('scooters', 'scooters.id', '=', 'rentals.scooter_id')
                     ->get()->toArray();
-                return view('report', ['data' => $data]);
+                return $data;
                 break;
 
             case 'user':
@@ -45,7 +45,7 @@ class ReportController extends Controller {
                     ->leftJoin('users', 'users.id', '=', 'rentals.user_id')
                     ->where('role_id', '=', '3')
                     ->get()->toArray();
-                return view('report', ['data' => $data]);
+                return $data;
                 break;
         }
     }
