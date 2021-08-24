@@ -8,57 +8,115 @@ import AllUsers from "./components/AllUsers";
 import EditUser from "./components/EditUser";
 import AllRentals from "./components/AllRentals";
 import Reports from "./components/Reports";
+import Login from "./components/Login";
+import Registration from "./components/Registration";
+import Home from "./components/Home";
+import axios from "axios";
 
 export const routes = [
     {
+        name: 'home',
+        path: '/',
+        component: Home,
+        meta: {
+            permissions: ['all']
+        }
+    },
+    {
         name: 'scooters_home',
         path: '/scooters',
-        component: AllScooter
+        component: AllScooter,
+        meta: {
+            permissions: ['admin']
+        }
     },
     {
         name: 'scooter_create',
         path: '/scooter/create',
-        component: CreateScooter
+        component: CreateScooter,
+        meta: {
+            permissions: ['admin']
+        }
     },
     {
         name: 'scooter_edit',
         path: '/scooter/edit/:id',
-        component: EditScooter
+        component: EditScooter,
+        meta: {
+            permissions: ['admin']
+        }
     },
     {
         name: 'booking',
         path: '/booking',
-        component: Booking
+        component: Booking,
+        meta: {
+            permissions: ['admin','customer','manager']
+        }
     },
     {
         name: 'rental_point',
         path: '/rental_points',
-        component: AllRentalPoint
+        component: AllRentalPoint,
+        meta: {
+            permissions: ['admin']
+        }
     },
     {
         name: 'rental_point_edit',
         path: '/rental_point/edit/:id',
-        component: EditRentalPoint
+        component: EditRentalPoint,
+        meta: {
+            permissions: ['admin']
+        }
     },
     {
         name: 'users',
         path: '/users',
-        component: AllUsers
+        component: AllUsers,
+        meta: {
+            permissions: ['admin']
+        }
     },
     {
         name: 'user_edit',
         path: '/user/edit/:id',
-        component: EditUser
+        component: EditUser,
+        meta: {
+            permissions: ['admin']
+        }
     },
     {
         name: 'rentals',
         path: '/rentals',
-        component: AllRentals
+        component: AllRentals,
+        meta: {
+            permissions: ['admin', 'manager']
+        }
     },
     {
         name: 'reports',
         path: '/reports',
-        component: Reports
+        component: Reports,
+        meta: {
+            permissions: ['admin']
+        }
+    },
+    {
+        name: 'login',
+        path: '/login',
+        component: Login,
+        meta: {
+            permissions: ['all']
+        }
+    },
+    {
+        name: 'register',
+        path: '/register',
+        component: Registration,
+        meta: {
+            permissions: ['all']
+        }
     }
 
 

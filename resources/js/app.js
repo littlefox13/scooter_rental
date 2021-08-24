@@ -52,11 +52,48 @@ const router = new VueRouter({
     routes: routes
 });
 
+router.beforeEach((to, from, next) => {
+
+    let perm = to.meta.permissions;
+    console.log(perm);
+    console.log(typeof perm);
+    if (typeof perm == "undefined") {
+        next({name: 'home'});
+        return;
+    }
+
+    if(perm.indexOf('all') != -1) {
+        console.log('all');
+        next();
+    } else {
+        axios.post('auth/init')
+            .then((resp)=>
+                {
+                    let user = resp.data.user;
+                    console.log('user');
+                    console.log(user);
+                    if (user == null){
+                        next({name: 'login'});
+                    } else {
+                        if (perm.indexOf(user.role) != -1) {
+                            next();
+                        } else {
+                            next({name: 'home'});
+                        }
+                    }
+                });
+    }
+
+        /*if (to.name !== 'Login' && !isAuthenticated()) next({ name: 'booking' })
+        else next()*/
+});
+
 const app = new Vue({
     el: '#app',
     router: router,
     render: h => h(App),
 });
+
 /*
 const app = new Vue({
     el: '#app',

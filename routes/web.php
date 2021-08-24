@@ -7,6 +7,7 @@ use App\Http\Controllers\RentalController;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,59 +28,43 @@ Route::get('{any}', function () {
     return view('app');
 })->where('any', '.*');
 
-Route::resource('booking', \App\Http\Controllers\BookingController::class)->only(['index','store']);
+Route::prefix('auth')->group(function(){
+    Route::post('login', [App\Http\Controllers\API\AuthController::class, 'login'])->name('login');
+    Route::post('logout', [App\Http\Controllers\API\AuthController::class, 'logout'])->name('logout');
+    Route::post('init', [\App\Http\Controllers\API\AuthController::class, 'init'])->name('init');
+    Route::post('register', [App\Http\Controllers\API\AuthController::class, 'register'])->name('register');
 
-Route::resource('user', \App\Http\Controllers\UserController::class)->only(['index','show','update']);
+    Route::group(['middleware'=>'auth'], function(){
+        //Route::post('login', [\App\Http\Controllers\API\AuthController::class, 'login']);
+        //Route::post('init', [\App\Http\Controllers\API\AuthController::class, 'init']);
+        //Route::post('init', [\App\Http\Controllers\API\AuthController::class, 'init']);
+        Route::post('logout', [\App\Http\Controllers\API\AuthController::class, 'logout']);
+        //Route::get('init', [App\Http\Controllers\API\AuthController::class, 'init'])->name('init');
+    });
+});
+Route::prefix('api')->group( function(){
 
-Route::resource('report', \App\Http\Controllers\ReportController::class);
-
-Route::post('report/show', [\App\Http\Controllers\ReportController::class, 'show']);
+    Route::group(['middleware' => 'auth'], function(){
+        Route::resource('booking', \App\Http\Controllers\BookingController::class);
+        Route::resource('rental_points', \App\Http\Controllers\RentalPointController::class)->middleware('isAdmin');
+        Route::resource('scooters', \App\Http\Controllers\ScooterController::class)->middleware('isAdmin');
+        Route::resource('users', \App\Http\Controllers\UserController::class)->middleware('isAdmin');
+        Route::post('/rentals/update', [\App\Http\Controllers\RentalController::class, 'update'])->middleware('isManagerOrAdmin');
+        Route::resource('rentals', \App\Http\Controllers\RentalController::class)->middleware('isManagerOrAdmin');
+        Route::resource('/reports', \App\Http\Controllers\ReportController::class)->middleware('isAdmin');
+    });
+});
 
 Route::get('test', function(){
-    echo '123';
+
     echo "<pre>";
-    $tmp = DB::table('users')->get();
+    $tmp = \Illuminate\Support\Facades\Auth::user();
     print_r($tmp);
     echo "</pre>";
-
+    $tmp = Auth::user();
     echo "<pre>";
-
+    print_r($tmp);
     echo "</pre>";
-});
-
-Route::get('/', function () {
-    echo "<pre>";
-    print_r(\App\Models\User::all());
-    echo "</pre>";
-
-    return view('welcome', ['users' => \App\Models\User::all()]);
-});
-
-Route::get('/rental_points', function(){
-    return view('rental_points', ['rental_points' => \App\Models\RentalPoint::all()]);
-});
-
-Route::post('/rental_points', function (Request $request) {
-
-    $rental_point = new \App\Models\RentalPoint();
-    $rental_point->address = $request->address;
-    $rental_point->save();
-
-    return redirect('/rental_points');
-});
-
-Route::delete('/rental_point/{rental_point}', function (\App\Models\RentalPoint $rental_point) {
-    $rental_point->delete();
-
-    return redirect('/rental_points');
-});
-
-
-Route::post('/rental_point/update/{rental_point}', function (\App\Models\RentalPoint $rental_point, Request $request) {
-
-    $rental_point->address = $request->address;
-    $rental_point->save();
-    return redirect('/rental_points');
 });
 
 
@@ -87,3 +72,5 @@ Route::post('/rental_point/update/{rental_point}', function (\App\Models\RentalP
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
