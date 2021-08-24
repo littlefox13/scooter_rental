@@ -109,7 +109,9 @@
                     .post(`/api/rentals/update/`, this.rentals[index])
                     .then((res) => {
                         console.log(res);
-                        this.rentals[index] = res.data;
+                        let i = this.rentals.map(data => data.id).indexOf(this.rentals[index].id);
+                        this.rentals.splice(i, 1);
+                        this.rentals.push(res.data);
                     });
             }
         }

@@ -2087,7 +2087,14 @@ __webpack_require__.r(__webpack_exports__);
       this.rentals[index].action = action;
       this.axios.post("/api/rentals/update/", this.rentals[index]).then(function (res) {
         console.log(res);
-        _this3.rentals[index] = res.data;
+
+        var i = _this3.rentals.map(function (data) {
+          return data.id;
+        }).indexOf(_this3.rentals[index].id);
+
+        _this3.rentals.splice(i, 1);
+
+        _this3.rentals.push(res.data);
       });
     }
   }

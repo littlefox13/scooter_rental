@@ -1,6 +1,10 @@
 <?php
 
-class FirstDataSeeder extends \Illuminate\Database\Seeder {
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+
+class FirstDataSeeder extends Seeder {
     public function run() {
         \App\Models\Role::create(['description' => 'admin']);
         \App\Models\Role::create(['description' => 'manager']);

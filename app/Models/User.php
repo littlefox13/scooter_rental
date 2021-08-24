@@ -22,6 +22,7 @@ class User extends Authenticatable
         'password',
         'role_id'
     ];
+    public $timestamps = false;
 
     /**
      * The attributes that should be hidden for arrays.

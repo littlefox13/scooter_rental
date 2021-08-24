@@ -18,11 +18,11 @@ class CreateRentalsTable extends Migration
             $table->integer('scooter_id');
             $table->integer('user_id');
             $table->integer('rental_point_id');
-            $table->string('reservation_time');
+            $table->string('reservation_time')->nullable();
             $table->integer('rental_status_id');
-            $table->string('collateral_data');
-            $table->integer('cost');
-            $table->integer('manager_id');
+            $table->string('collateral_data')->nullable();
+            $table->integer('cost')->nullable();
+            $table->integer('manager_id')->nullable();
         });
     }
 
