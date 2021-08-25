@@ -12,6 +12,7 @@ import Login from "./components/Login";
 import Registration from "./components/Registration";
 import Home from "./components/Home";
 import axios from "axios";
+import CreateRental from "./components/CreateRental";
 
 export const routes = [
     {
@@ -92,6 +93,14 @@ export const routes = [
         component: AllRentals,
         meta: {
             permissions: ['admin', 'manager']
+        }
+    },
+    {
+        name: 'rental_create',
+        path: '/rental/create',
+        component: CreateRental,
+        meta: {
+            permissions: ['admin']
         }
     },
     {

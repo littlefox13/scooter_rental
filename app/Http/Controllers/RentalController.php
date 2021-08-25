@@ -30,10 +30,10 @@ class RentalController extends Controller
             $rentals[$k]['reservation_time'] = trim($v['reservation_time']);
         }
         return ['rentals' => $rentals,
-                                        'scooters'=>$scooters,
-                                        'users'=>$users,
-                                        'rental_points' =>$rental_points,
-                                        'rental_statuses'=>$rental_statuses];
+                'scooters'=>$scooters,
+                'users'=>$users,
+                'rental_points' =>$rental_points,
+                'rental_statuses'=>$rental_statuses];
     }
 
 
@@ -48,11 +48,10 @@ class RentalController extends Controller
         $users = User::all()->toArray();
         $rental_points = RentalPoint::all()->toArray();
         $rental_statuses = RentalStatuse::all()->toArray();
-        return view('rentals.create', [
-                                            'scooters'=>$scooters,
-                                            'users'=>$users,
-                                            'rental_points'=>$rental_points,
-                                            'rental_statuses'=>$rental_statuses]);
+        return  ['scooters'=>$scooters,
+                'users'=>$users,
+                'rental_points'=>$rental_points,
+                'rental_statuses'=>$rental_statuses];
     }
 
     /**
@@ -68,9 +67,7 @@ class RentalController extends Controller
             'scooter_id' => 'required',
             'user_id' => 'required',
             'rental_point_id' => 'required',
-            'rental_status_id' => 'required',
             'collateral_data' => 'required',
-            'reservation_time' => 'required'
         ]);
 
         $request->request->set('reservation_time', Carbon::now()->timestamp);

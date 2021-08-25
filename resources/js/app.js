@@ -66,7 +66,7 @@ router.beforeEach((to, from, next) => {
         console.log('all');
         next();
     } else {
-        axios.post('auth/init')
+        axios.post('/auth/init')
             .then((resp)=>
                 {
                     let user = resp.data.user;

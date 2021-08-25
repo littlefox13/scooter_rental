@@ -2043,6 +2043,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -2326,6 +2328,91 @@ __webpack_require__.r(__webpack_exports__);
       _this2.scooters = response.data.scooters;
       console.log(_this2.scooters);
     });
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CreateRental.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CreateRental.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      rental: {},
+      scooters: {},
+      users: {},
+      rental_points: {}
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    this.axios.get("/api/rentals/").then(function (res) {
+      _this.scooters = res.data.scooters;
+      _this.users = res.data.users;
+      _this.rental_points = res.data.rental_points;
+      console.log(res.data);
+    });
+  },
+  methods: {
+    addRental: function addRental() {
+      var _this2 = this;
+
+      this.axios.post('/api/rentals', this.rental).then(function (response) {
+        return _this2.$router.push({
+          name: 'rentals'
+        });
+      })["catch"](function (err) {
+        return console.log(err);
+      })["finally"](function () {
+        return _this2.loading = false;
+      });
+    }
   }
 });
 
@@ -3077,7 +3164,7 @@ router.beforeEach(function (to, from, next) {
     console.log('all');
     next();
   } else {
-    axios__WEBPACK_IMPORTED_MODULE_2___default().post('auth/init').then(function (resp) {
+    axios__WEBPACK_IMPORTED_MODULE_2___default().post('/auth/init').then(function (resp) {
       var user = resp.data.user;
       console.log('user');
       console.log(user);
@@ -3194,6 +3281,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Home__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/Home */ "./resources/js/components/Home.vue");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _components_CreateRental__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/CreateRental */ "./resources/js/components/CreateRental.vue");
+
 
 
 
@@ -3277,6 +3366,13 @@ var routes = [{
   component: _components_AllRentals__WEBPACK_IMPORTED_MODULE_8__.default,
   meta: {
     permissions: ['admin', 'manager']
+  }
+}, {
+  name: 'rental_create',
+  path: '/rental/create',
+  component: _components_CreateRental__WEBPACK_IMPORTED_MODULE_14__.default,
+  meta: {
+    permissions: ['admin']
   }
 }, {
   name: 'reports',
@@ -60366,6 +60462,45 @@ component.options.__file = "resources/js/components/Booking.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/CreateRental.vue":
+/*!**************************************************!*\
+  !*** ./resources/js/components/CreateRental.vue ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _CreateRental_vue_vue_type_template_id_6603312b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CreateRental.vue?vue&type=template&id=6603312b& */ "./resources/js/components/CreateRental.vue?vue&type=template&id=6603312b&");
+/* harmony import */ var _CreateRental_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CreateRental.vue?vue&type=script&lang=js& */ "./resources/js/components/CreateRental.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _CreateRental_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _CreateRental_vue_vue_type_template_id_6603312b___WEBPACK_IMPORTED_MODULE_0__.render,
+  _CreateRental_vue_vue_type_template_id_6603312b___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/CreateRental.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/CreateScooter.vue":
 /*!***************************************************!*\
   !*** ./resources/js/components/CreateScooter.vue ***!
@@ -60813,6 +60948,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/CreateRental.vue?vue&type=script&lang=js&":
+/*!***************************************************************************!*\
+  !*** ./resources/js/components/CreateRental.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateRental_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CreateRental.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CreateRental.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateRental_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
 /***/ "./resources/js/components/CreateScooter.vue?vue&type=script&lang=js&":
 /*!****************************************************************************!*\
   !*** ./resources/js/components/CreateScooter.vue?vue&type=script&lang=js& ***!
@@ -61055,6 +61206,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Booking_vue_vue_type_template_id_28bb4584___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Booking_vue_vue_type_template_id_28bb4584___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Booking.vue?vue&type=template&id=28bb4584& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Booking.vue?vue&type=template&id=28bb4584&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/CreateRental.vue?vue&type=template&id=6603312b&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/CreateRental.vue?vue&type=template&id=6603312b& ***!
+  \*********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateRental_vue_vue_type_template_id_6603312b___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateRental_vue_vue_type_template_id_6603312b___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateRental_vue_vue_type_template_id_6603312b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CreateRental.vue?vue&type=template&id=6603312b& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CreateRental.vue?vue&type=template&id=6603312b&");
 
 
 /***/ }),
@@ -61482,162 +61650,178 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("h2", { staticClass: "text-center" }, [_vm._v("Rentals list")]),
-    _vm._v(" "),
-    _c("table", { staticClass: "table" }, [
-      _vm._m(0),
+  return _c(
+    "div",
+    [
+      _c("h2", { staticClass: "text-center" }, [_vm._v("Rentals list")]),
       _vm._v(" "),
       _c(
-        "tbody",
-        _vm._l(_vm.rentals, function(rental, index) {
-          return _c("tr", { key: rental.id }, [
-            _c("td", [
-              _vm._v(
-                "\n                " + _vm._s(rental.id) + "\n            "
-              )
-            ]),
-            _vm._v(" "),
-            _c("td", [
-              _vm._v(
-                "\n                " +
-                  _vm._s(_vm.scooters[rental.scooter_id]["description"]) +
-                  "\n            "
-              )
-            ]),
-            _vm._v(" "),
-            _c("td", [
-              _vm._v(
-                "\n                " +
-                  _vm._s(_vm.users[rental.user_id]["name"]) +
-                  "\n            "
-              )
-            ]),
-            _vm._v(" "),
-            _c("td", [
-              _vm._v(
-                "\n                " +
-                  _vm._s(_vm.rental_points[rental.rental_point_id]["address"]) +
-                  "\n            "
-              )
-            ]),
-            _vm._v(" "),
-            _c("td", [
-              _vm._v(
-                "\n                " +
-                  _vm._s(
-                    _vm.rental_statuses[rental.rental_status_id]["description"]
-                  ) +
-                  "\n            "
-              )
-            ]),
-            _vm._v(" "),
-            _c("td", [
-              _vm._v(
-                "\n                " +
-                  _vm._s(rental.collateral_data) +
-                  "\n            "
-              )
-            ]),
-            _vm._v(" "),
-            _c("td", [
-              _vm._v(
-                "\n                " + _vm._s(rental.cost) + "\n            "
-              )
-            ]),
-            _vm._v(" "),
-            _c("td", [
-              rental.rental_status_id == 3
-                ? _c("p", { staticClass: "mb2" }, [_vm._v("reserved to: ")])
-                : _vm._e(),
-              _vm._v(" "),
-              _c("p", [
+        "router-link",
+        { staticClass: "nav-item nav-link", attrs: { to: "/rental/create" } },
+        [_vm._v("Create Rental")]
+      ),
+      _vm._v(" "),
+      _c("table", { staticClass: "table" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "tbody",
+          _vm._l(_vm.rentals, function(rental, index) {
+            return _c("tr", { key: rental.id }, [
+              _c("td", [
                 _vm._v(
-                  " " + _vm._s(_vm.getHumanDate(rental.reservation_time)) + " "
+                  "\n                " + _vm._s(rental.id) + "\n            "
                 )
-              ])
-            ]),
-            _vm._v(" "),
-            _c("td", [
-              rental.rental_status_id == 1
-                ? _c("div", [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.rentals[index].cost,
-                          expression: "rentals[index].cost"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: { type: "text", value: "" },
-                      domProps: { value: _vm.rentals[index].cost },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.rentals[index],
-                            "cost",
-                            $event.target.value
-                          )
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-danger",
-                        on: {
-                          click: function($event) {
-                            return _vm.updateRental(index, "end")
-                          }
-                        }
-                      },
-                      [_vm._v("end")]
-                    )
-                  ])
-                : _vm._e(),
+              ]),
               _vm._v(" "),
-              rental.rental_status_id == 3
-                ? _c("div", [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-danger",
+              _c("td", [
+                _vm._v(
+                  "\n                " +
+                    _vm._s(_vm.scooters[rental.scooter_id]["description"]) +
+                    "\n            "
+                )
+              ]),
+              _vm._v(" "),
+              _c("td", [
+                _vm._v(
+                  "\n                " +
+                    _vm._s(_vm.users[rental.user_id]["name"]) +
+                    "\n            "
+                )
+              ]),
+              _vm._v(" "),
+              _c("td", [
+                _vm._v(
+                  "\n                " +
+                    _vm._s(
+                      _vm.rental_points[rental.rental_point_id]["address"]
+                    ) +
+                    "\n            "
+                )
+              ]),
+              _vm._v(" "),
+              _c("td", [
+                _vm._v(
+                  "\n                " +
+                    _vm._s(
+                      _vm.rental_statuses[rental.rental_status_id][
+                        "description"
+                      ]
+                    ) +
+                    "\n            "
+                )
+              ]),
+              _vm._v(" "),
+              _c("td", [
+                _vm._v(
+                  "\n                " +
+                    _vm._s(rental.collateral_data) +
+                    "\n            "
+                )
+              ]),
+              _vm._v(" "),
+              _c("td", [
+                _vm._v(
+                  "\n                " + _vm._s(rental.cost) + "\n            "
+                )
+              ]),
+              _vm._v(" "),
+              _c("td", [
+                rental.rental_status_id == 3
+                  ? _c("p", { staticClass: "mb2" }, [_vm._v("reserved to: ")])
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("p", [
+                  _vm._v(
+                    " " +
+                      _vm._s(_vm.getHumanDate(rental.reservation_time)) +
+                      " "
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("td", [
+                rental.rental_status_id == 1
+                  ? _c("div", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.rentals[index].cost,
+                            expression: "rentals[index].cost"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", value: "" },
+                        domProps: { value: _vm.rentals[index].cost },
                         on: {
-                          click: function($event) {
-                            return _vm.updateRental(index, "start")
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.rentals[index],
+                              "cost",
+                              $event.target.value
+                            )
                           }
                         }
-                      },
-                      [_vm._v("start")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-danger",
-                        on: {
-                          click: function($event) {
-                            return _vm.updateRental(index, "end")
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-danger",
+                          on: {
+                            click: function($event) {
+                              return _vm.updateRental(index, "end")
+                            }
                           }
-                        }
-                      },
-                      [_vm._v("abort reservation")]
-                    )
-                  ])
-                : _vm._e()
+                        },
+                        [_vm._v("end")]
+                      )
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                rental.rental_status_id == 3
+                  ? _c("div", [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-danger",
+                          on: {
+                            click: function($event) {
+                              return _vm.updateRental(index, "start")
+                            }
+                          }
+                        },
+                        [_vm._v("start")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-danger",
+                          on: {
+                            click: function($event) {
+                              return _vm.updateRental(index, "end")
+                            }
+                          }
+                        },
+                        [_vm._v("abort reservation")]
+                      )
+                    ])
+                  : _vm._e()
+              ])
             ])
-          ])
-        }),
-        0
-      )
-    ])
-  ])
+          }),
+          0
+        )
+      ])
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
@@ -62024,6 +62208,216 @@ var render = function() {
               "button",
               { staticClass: "btn btn-primary", attrs: { type: "submit" } },
               [_vm._v("Booking now!")]
+            )
+          ]
+        )
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CreateRental.vue?vue&type=template&id=6603312b&":
+/*!************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CreateRental.vue?vue&type=template&id=6603312b& ***!
+  \************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("h3", { staticClass: "text-center" }, [_vm._v("Create Rental")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-6" }, [
+        _c(
+          "form",
+          {
+            on: {
+              submit: function($event) {
+                $event.preventDefault()
+                return _vm.addRental.apply(null, arguments)
+              }
+            }
+          },
+          [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("Scooter:")]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.rental.scooter_id,
+                      expression: "rental.scooter_id"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.rental,
+                        "scooter_id",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                _vm._l(_vm.scooters, function(scooter) {
+                  return _c("option", { domProps: { value: scooter.id } }, [
+                    _vm._v(_vm._s(scooter.description))
+                  ])
+                }),
+                0
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("User:")]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.rental.user_id,
+                      expression: "rental.user_id"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.rental,
+                        "user_id",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                _vm._l(_vm.users, function(user) {
+                  return _c("option", { domProps: { value: user.id } }, [
+                    _vm._v(_vm._s(user.name))
+                  ])
+                }),
+                0
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("Rental point:")]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.rental.rental_point_id,
+                      expression: "rental.rental_point_id"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.rental,
+                        "rental_point_id",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                _vm._l(_vm.rental_points, function(rental_point) {
+                  return _c(
+                    "option",
+                    { domProps: { value: rental_point.id } },
+                    [_vm._v(_vm._s(rental_point.address))]
+                  )
+                }),
+                0
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("Collateral data")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.rental.collateral_data,
+                    expression: "rental.collateral_data"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text" },
+                domProps: { value: _vm.rental.collateral_data },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.rental, "collateral_data", $event.target.value)
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c(
+              "button",
+              { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+              [_vm._v("Create")]
             )
           ]
         )

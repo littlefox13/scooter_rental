@@ -2,6 +2,8 @@
     <div>
         <h2 class="text-center">Rentals list</h2>
 
+        <router-link to="/rental/create" class="nav-item nav-link">Create Rental</router-link>
+
         <table class="table">
             <thead>
             <tr>
